@@ -1,0 +1,65 @@
+openapi: 3.0.0
+info:
+  title: Indra Rimac Challenge API
+  description: API para la prueba técnica de backend developer
+  version: "1.0.0"
+servers:
+  - url: http://localhost:3000/dev
+    description: API local
+  - url: https://nzhb50uqje.execute-api.us-east-1.amazonaws.com/dev
+    description: API en AWS
+paths:
+  /characters:
+    post:
+      summary: Crea un nuevo personaje
+      tags:
+        - Characters
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Character'
+      responses:
+        '201':
+          description: Personaje creado exitosamente
+        '500':
+          description: Error al crear el personaje
+    get:
+      summary: Obtiene todos los personajes
+      tags:
+        - Characters
+      responses:
+        '200':
+          description: Lista de personajes
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Character'
+        '500':
+          description: Error al obtener los personajes
+components:
+  schemas:
+    Character:
+      type: object
+      properties:
+        id:
+          type: string
+        nombre:
+          type: string
+        altura:
+          type: string
+        peso:
+          type: string
+        color_cabello:
+          type: string
+        color_piel:
+          type: string
+        color_ojos:
+          type: string
+        fecha_nacimiento:
+          type: string
+        genero:
+          type: string
